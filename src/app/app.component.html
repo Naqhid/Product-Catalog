@@ -1,3 +1,34 @@
 <h1>Product Catalog</h1>
 
+<div class="product-list">
+  <div *ngFor="let product of products" class="product">
+    <img class="img" [src]="product.images[0]" alt="Product Image" />
+    <h2>{{ product['brand'] }}</h2>
+    <p>{{ product.price | currency }}</p>
+    <button (click)="addToCart(product)">Add to Cart</button>
+  </div>
+</div>
 
+<button class="cart-button" (click)="toggleCartPopup()">
+  <i class="fas fa-shopping-cart">
+    <span class="cart-notification">{{ cartItems.length }}</span>
+  </i>
+</button>
+
+<div class="cart-popup" [class.active]="isCartPopupOpen">
+  <i class="close-icon" (click)="toggleCartPopup()">&times;</i>
+  <h2>Shopping Cart</h2>
+  <div class="cart">
+    <p>Total Items: {{ cartItems.length }}</p>
+    <div class="grid-container" style="max-height: 200px; overflow: scroll">
+      <div *ngFor="let item of cartItems" class="cart-item grid-item">
+        <h3>{{ item['brand'] }}</h3>
+        <p>${{ item.price }}</p>
+        <button (click)="removeFromCart(item)">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    </div>
+    <p>Total Price: ${{ calculateTotalPrice() }}</p>
+  </div>
+</div>
