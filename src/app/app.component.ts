@@ -30,8 +30,7 @@ export class AppComponent {
       },
       error: (error: any) => {
         console.log('Error fetching products:', error);
-        // Display a user-friendly error message
-        // You can set a flag or display an error message on the UI
+        
       },
     });
   }
